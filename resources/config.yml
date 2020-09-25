@@ -1,0 +1,20 @@
+---
+# KygekWhitelistKick config
+# Plugin made by Kygekraqmak
+
+##### DANGER ZONE #####
+# Do not change this (Only for internal use)!
+config-version: "1.0"
+# If you encounter bugs set this to true to reset the config!
+reset: false
+#######################
+
+# Whether to enable KygekWhitelistKick
+# If set to true, the plugin will kick not whitelisted players
+# If set to false, the plugin will not kick not whitelisted players
+enabled: true
+# Set the kick reason
+# Use "&" as formatting codes.
+# Leave it empty if you want to use the default reason
+reason: ""
+...

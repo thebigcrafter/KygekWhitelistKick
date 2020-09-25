@@ -1,0 +1,25 @@
+---
+name: KygekWhitelistKick
+version: 1.0.0
+main: Kygekraqmak\KygekWhitelistKick\WhitelistKick
+api: 3.0.0
+author: Kygekraqmak
+
+permissions:
+  kygekwhitelistkick.cmd:
+    description: Permission to use all KygekWhitelistKick commands
+    default: op
+    children:
+      kygekwhitelistkick.cmd.help:
+        description: Permission to see KygekWhitelistKick commands
+        default: op
+      kygekwhitelistkick.cmd.off:
+        description: Permission to turn off KygekWhitelistKick
+        default: op
+      kygekwhitelistkick.cmd.on:
+        description: Permission to turn on KygekWhitelistKick
+        default: op
+      kygekwhitelistkick.cmd.set:
+        description: Permission to change kick reason
+        default: op
+...
