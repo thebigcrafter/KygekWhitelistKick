@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/Kygekraqmak/KygekWhitelistKick
+build-by-default: true
+branches:
+- master
+projects:
+  KygekWhitelistKick:
+    path: ""
+...
