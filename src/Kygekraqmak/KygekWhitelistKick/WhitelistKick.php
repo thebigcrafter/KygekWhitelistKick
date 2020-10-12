@@ -119,12 +119,8 @@ class WhitelistKick extends PluginBase implements Listener {
 
     public function isWhitelisted(Player $player) : bool {
         if ($player->isOp()) return true;
-        $file = $this->getDataFolder()."../../white-list.txt";
-        if (filesize($file) == 0 xor !file_exists($file)) return false;
-        $fopen = fopen($file, "r");
-        $whitelist = explode("\n", fread($fopen, filesize($file)));
-        fclose($fopen);
-        return in_array(strtolower($player->getName()), $whitelist);
+        $this->getServer()->getWhitelisted()->reload();
+        return in_array(strtolower($player->getName()), array_keys($this->getServer()->getWhitelisted()->getAll()));
     }
 
 }
