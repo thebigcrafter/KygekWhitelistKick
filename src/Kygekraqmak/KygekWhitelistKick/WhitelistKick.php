@@ -41,7 +41,7 @@ class WhitelistKick extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveResource("config.yml");
         $this->checkConfig();
-        $this->getServer()->getCommandMap()->register("whitelistkick", new Commands($this));
+        $this->getServer()->getCommandMap()->register("KygekWhitelistKick", new Commands($this));
     }
 
     public function checkConfig() {
