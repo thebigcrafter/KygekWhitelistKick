@@ -45,7 +45,7 @@ class WhitelistKick extends PluginBase implements Listener {
     }
 
     public function checkConfig() {
-        if ($this->getConfig()->get("config-version") !== "1.0") {
+        if ($this->getConfig()->get("config-version") !== "1.1") {
             $this->getLogger()->notice("Your configuration file is outdated, updating the config.yml...");
             $this->getLogger()->notice("The old configuration file can be found at config_old.yml");
             rename($this->getDataFolder()."config.yml", $this->getDataFolder()."config_old.yml");
