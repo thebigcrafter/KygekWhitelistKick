@@ -17,4 +17,7 @@ enabled: true
 # Use "&" as formatting codes.
 # Leave it empty if you want to use the default reason
 reason: ""
+
+# Whether to check for plugin updates (Recommended)
+check-updates: true
 ...

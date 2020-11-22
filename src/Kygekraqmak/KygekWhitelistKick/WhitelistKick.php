@@ -26,6 +26,7 @@ declare(strict_types=1);
 
 namespace Kygekraqmak\KygekWhitelistKick;
 
+use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
@@ -41,6 +42,9 @@ class WhitelistKick extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveResource("config.yml");
         $this->checkConfig();
+        if ($this->getConfig()->get("check-updates", true)) {
+            UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
+        }
         $this->getServer()->getCommandMap()->register("KygekWhitelistKick", new Commands($this));
     }
 
@@ -62,7 +66,6 @@ class WhitelistKick extends PluginBase implements Listener {
 
     public function onWhitelistEnabled(CommandEvent $event) {
         $command = $event->getCommand();
-        $sender = $event->getSender();
         if ($command == "whitelist on") {
             if ($this->getConfig()->get("enabled") === true) {
                 $this->getConfig()->reload();

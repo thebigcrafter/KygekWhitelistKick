@@ -5,4 +5,7 @@ branches:
 projects:
   KygekWhitelistKick:
     path: ""
+    libs:
+    - src: JackMD/UpdateNotifier/UpdateNotifier
+      version: ^2.1
 ...
