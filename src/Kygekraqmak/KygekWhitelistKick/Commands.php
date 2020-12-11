@@ -33,6 +33,7 @@ use pocketmine\utils\TextFormat as TF;
 class Commands extends PluginCommand {
 
     private const NO_PERM = TF::RED . "You do not have permission to use this command";
+    private const CONFIG_NOT_EXISTS = WhitelistKick::PREFIX . TF::RED . "Configuration file is missing, please restart the server!";
 
     private $main;
 
@@ -56,24 +57,39 @@ class Commands extends PluginCommand {
         } elseif (isset($args[0])) {
             switch ($args[0]) {
                 case "help":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help")) {
                         $this->main()->getHelp($sender);
+                    }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "off":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.off"))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.off")) {
+                        if (!$this->main->configExists()) {
+                            $sender->sendMessage(self::CONFIG_NOT_EXISTS);
+                            return true;
+                        }
                         $this->main()->disableWhitelistKick($sender);
+                    }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "on":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.on"))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.on")) {
+                        if (!$this->main->configExists()) {
+                            $sender->sendMessage(self::CONFIG_NOT_EXISTS);
+                            return true;
+                        }
                         $this->main()->enableWhitelistKick($sender);
+                    }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "set":
                     if ($sender->hasPermission("kygekwhitelistkick.cmd.set")) {
                         if (empty($args[1])) $this->main()->getSubcommandUsage($sender);
                         else {
+                            if (!$this->main->configExists()) {
+                                $sender->sendMessage(self::CONFIG_NOT_EXISTS);
+                                return true;
+                            }
                             unset($args[0]);
                             $this->main()->setKickReason(implode(" ", $args), $sender);
                         }

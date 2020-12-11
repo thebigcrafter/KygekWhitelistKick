@@ -13,6 +13,7 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 - Enable or disable plugin with command
 - Kick reason can be changed using command
 - Automatic plugin update checker on server startup
+- Missing configuration file detection
 
 # How to Install
 
@@ -39,11 +40,10 @@ Use `-` before each permission to blacklist the command(s) permission to groups/
 # Upcoming Features
 
 - Form mode
-- Missing config file detection
 - And much more
 
 # Additional Notes
 
-- Join our Discord server <a href="https://discord.gg/CXtqUZv">here</a> for latest updates from Kygekraqmak.
-- If you found bugs or want to give suggestions, please visit <a href="https://github.com/Kygekraqmak/KygekWhitelistKick/issues">here</a> or DM KygekDev#6415 via Discord.
-- We accept any contributions! If you want to contribute please make a pull request in <a href="https://github.com/Kygekraqmak/KygekWhitelistKick/pulls">here</a>.
+- Join our Discord server <a href="https://discord.gg/CXtqUZv">here</a> for latest updates from KygekTeam.
+- If you found bugs or want to give suggestions, please visit <a href="https://github.com/Kygekraqmak/KygekWhitelistKick/issues">here</a> or join our Discord server.
+- We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/Kygekraqmak/KygekWhitelistKick/pulls">here</a>.

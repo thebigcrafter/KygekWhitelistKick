@@ -104,10 +104,14 @@ class WhitelistKick extends PluginBase implements Listener {
 
     public function getHelp(CommandSender $sender) {
         $sender->sendMessage(TF::YELLOW . "===== " . TF::GREEN."KygekWhitelistKick Commands" . TF::YELLOW . " =====");
-        $sender->sendMessage(TF::AQUA . "> help: " . TF::GRAY."/wlkick help");
-        $sender->sendMessage(TF::AQUA . "> off: " . TF::GRAY."/wlkick off");
-        $sender->sendMessage(TF::AQUA . "> on: " . TF::GRAY."/wlkick on");
-        $sender->sendMessage(TF::AQUA . "> set: " . TF::GRAY."/wlkick set <reason>");
+        if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
+            $sender->sendMessage(TF::AQUA . "> help: " . TF::GRAY."/wlkick help");
+        if ($sender->hasPermission("kygekwhitelistkick.cmd.off"))
+            $sender->sendMessage(TF::AQUA . "> off: " . TF::GRAY."/wlkick off");
+        if ($sender->hasPermission("kygekwhitelistkick.cmd.on"))
+            $sender->sendMessage(TF::AQUA . "> on: " . TF::GRAY."/wlkick on");
+        if ($sender->hasPermission("kygekwhitelistkick.cmd.set"))
+            $sender->sendMessage(TF::AQUA . "> set: " . TF::GRAY."/wlkick set <reason>");
     }
 
     public function getSubcommandUsage(CommandSender $sender) {
@@ -124,6 +128,10 @@ class WhitelistKick extends PluginBase implements Listener {
         if ($player->isOp()) return true;
         $this->getServer()->getWhitelisted()->reload();
         return in_array(strtolower($player->getName()), array_keys($this->getServer()->getWhitelisted()->getAll()));
+    }
+
+    public function configExists() : bool {
+        return file_exists($this->getDataFolder() . "config.yml");
     }
 
 }
