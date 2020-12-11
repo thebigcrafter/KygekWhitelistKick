@@ -32,11 +32,11 @@ use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\server\CommandEvent;
 use pocketmine\command\CommandSender;
-use pocketmine\utils\TextFormat as Color;
+use pocketmine\utils\TextFormat as TF;
 
 class WhitelistKick extends PluginBase implements Listener {
 
-    const PREFIX = Color::YELLOW."[".Color::AQUA."KygekWhitelistKick".Color::YELLOW."] ".Color::RESET;
+    const PREFIX = TF::YELLOW . "[".TF::AQUA . "KygekWhitelistKick" . TF::YELLOW . "] " . TF::RESET;
 
     public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -72,7 +72,7 @@ class WhitelistKick extends PluginBase implements Listener {
                 foreach ($this->getServer()->getOnlinePlayers() as $player) {
                     if ($this->isWhitelisted($player)) continue;
                     $reason = str_replace("&", "§", $this->getConfig()->get("reason"));
-                    $reason = ($reason != null) ? $reason : self::PREFIX.Color::RED."Whitelist have been enabled and you are not whitelisted!";
+                    $reason = ($reason != null) ? $reason : self::PREFIX . TF::RED . "Whitelist have been enabled and you are not whitelisted!";
                     $player->kick($reason);
                 }
             }
@@ -81,37 +81,37 @@ class WhitelistKick extends PluginBase implements Listener {
 
     public function enableWhitelistKick(CommandSender $sender) {
         if ($this->getConfig()->get("enabled") === true) {
-            $sender->sendMessage(self::PREFIX.Color::RED."KygekWhitelistKick have been enabled");
+            $sender->sendMessage(self::PREFIX . TF::RED . "KygekWhitelistKick have been enabled");
         } else {
             $this->setConfig("enabled", true);
-            $sender->sendMessage(self::PREFIX.Color::GREEN."Successfully enabled KygekWhitelistKick");
+            $sender->sendMessage(self::PREFIX . TF::GREEN . "Successfully enabled KygekWhitelistKick");
         }
     }
 
     public function disableWhitelistKick(CommandSender $sender) {
         if ($this->getConfig()->get("enabled") === false) {
-            $sender->sendMessage(self::PREFIX.Color::RED."KygekWhitelistKick have been disabled");
+            $sender->sendMessage(self::PREFIX . TF::RED . "KygekWhitelistKick have been disabled");
         } else {
             $this->setConfig("enabled", false);
-            $sender->sendMessage(self::PREFIX.Color::GREEN."Successfully disabled KygekWhitelistKick");
+            $sender->sendMessage(self::PREFIX . TF::GREEN . "Successfully disabled KygekWhitelistKick");
         }
     }
 
     public function setKickReason($reason, CommandSender $sender) {
         $this->setConfig("reason", $reason);
-        $sender->sendMessage(self::PREFIX.Color::GREEN."Successfully changed kick reason");
+        $sender->sendMessage(self::PREFIX . TF::GREEN . "Successfully changed kick reason");
     }
 
     public function getHelp(CommandSender $sender) {
-        $sender->sendMessage(Color::YELLOW."===== ".Color::GREEN."KygekWhitelistKick Commands".Color::YELLOW." =====");
-        $sender->sendMessage(Color::AQUA."> help: ".Color::GRAY."/wlkick help");
-        $sender->sendMessage(Color::AQUA."> off: ".Color::GRAY."/wlkick off");
-        $sender->sendMessage(Color::AQUA."> on: ".Color::GRAY."/wlkick on");
-        $sender->sendMessage(Color::AQUA."> set: ".Color::GRAY."/wlkick set <reason>");
+        $sender->sendMessage(TF::YELLOW . "===== " . TF::GREEN."KygekWhitelistKick Commands" . TF::YELLOW . " =====");
+        $sender->sendMessage(TF::AQUA . "> help: " . TF::GRAY."/wlkick help");
+        $sender->sendMessage(TF::AQUA . "> off: " . TF::GRAY."/wlkick off");
+        $sender->sendMessage(TF::AQUA . "> on: " . TF::GRAY."/wlkick on");
+        $sender->sendMessage(TF::AQUA . "> set: " . TF::GRAY."/wlkick set <reason>");
     }
 
     public function getSubcommandUsage(CommandSender $sender) {
-        $sender->sendMessage(self::PREFIX.Color::GRAY."Usage: /wlkick set <reason>");
+        $sender->sendMessage(self::PREFIX . TF::GRAY . "Usage: /wlkick set <reason>");
     }
 
     public function setConfig($key, $value) {

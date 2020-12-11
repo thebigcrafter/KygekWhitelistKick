@@ -26,22 +26,13 @@ declare(strict_types=1);
 
 namespace Kygekraqmak\KygekWhitelistKick;
 
-use pocketmine\Player;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\utils\TextFormat as Color;
-
-use Kygekraqmak\KygekWhitelistKick\WhitelistKick;
+use pocketmine\utils\TextFormat as TF;
 
 class Commands extends PluginCommand {
 
-    const PREFIX = Color::YELLOW."[".Color::AQUA."KygekWhitelistKick".Color::YELLOW."] ".Color::RESET;
-    const PERMALL = "kygekwhitelistkick.cmd";
-    const PERMHELP = "kygekwhitelistkick.cmd.help";
-    const PERMOFF = "kygekwhitelistkick.cmd.off";
-    const PERMON = "kygekwhitelistkick.cmd.on";
-    const PERMSET = "kygekwhitelistkick.cmd.set";
-    const NOPERM = Color::RED."You do not have permission to use this command";
+    private const NO_PERM = TF::RED . "You do not have permission to use this command";
 
     private $main;
 
@@ -53,45 +44,45 @@ class Commands extends PluginCommand {
         $this->setDescription("KygekWhitelistKick commands");
     }
 
-    public function main() {
+    public function main() : WhitelistKick {
         return $this->main;
     }
 
-    public function execute(CommandSender $sender, string $alias, array $args) : bool {
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
         if (count($args) < 1) {
-            if ($sender->hasPermission(self::PERMALL) || $sender->hasPermission(self::PERMHELP))
+            if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
                 $this->main()->getHelp($sender);
-            else $sender->sendMessage(self::NOPERM);
+            else $sender->sendMessage(self::NO_PERM);
         } elseif (isset($args[0])) {
             switch ($args[0]) {
                 case "help":
-                    if ($sender->hasPermission(self::PERMALL) || $sender->hasPermission(self::PERMHELP))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
                         $this->main()->getHelp($sender);
-                    else $sender->sendMessage(self::NOPERM);
+                    else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "off":
-                    if ($sender->hasPermission(self::PERMALL) || $sender->hasPermission(self::PERMOFF))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.off"))
                         $this->main()->disableWhitelistKick($sender);
-                    else $sender->sendMessage(self::NOPERM);
+                    else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "on":
-                    if ($sender->hasPermission(self::PERMALL) || $sender->hasPermission(self::PERMON))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.on"))
                         $this->main()->enableWhitelistKick($sender);
-                    else $sender->sendMessage(self::NOPERM);
+                    else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "set":
-                    if ($sender->hasPermission(self::PERMALL) || $sender->hasPermission(self::PERMSET)) {
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.set")) {
                         if (empty($args[1])) $this->main()->getSubcommandUsage($sender);
                         else {
                             unset($args[0]);
                             $this->main()->setKickReason(implode(" ", $args), $sender);
                         }
-                    } else $sender->sendMessage(self::NOPERM);
+                    } else $sender->sendMessage(self::NO_PERM);
                     break;
                 default:
-                    if ($sender->hasPermission(self::PERMALL) || $sender->hasPermission(self::PERMHELP))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
                         $this->main()->getHelp($sender);
-                    else $sender->sendMessage(self::NOPERM);
+                    else $sender->sendMessage(self::NO_PERM);
             }
         }
         return true;
