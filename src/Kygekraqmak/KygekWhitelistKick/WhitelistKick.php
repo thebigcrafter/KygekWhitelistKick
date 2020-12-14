@@ -38,7 +38,16 @@ class WhitelistKick extends PluginBase implements Listener {
 
     const PREFIX = TF::YELLOW . "[".TF::AQUA . "KygekWhitelistKick" . TF::YELLOW . "] " . TF::RESET;
 
+    /** @var WhitelistKick */
+    public static $instance;
+
+    public static function getInstance() : self {
+        return self::$instance;
+    }
+
     public function onEnable() {
+        self::$instance = $this;
+
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveResource("config.yml");
         $this->checkConfig();
@@ -49,7 +58,7 @@ class WhitelistKick extends PluginBase implements Listener {
     }
 
     public function checkConfig() {
-        if ($this->getConfig()->get("config-version") !== "1.1") {
+        if ($this->getConfig()->get("config-version") !== "1.3") {
             $this->getLogger()->notice("Your configuration file is outdated, updating the config.yml...");
             $this->getLogger()->notice("The old configuration file can be found at config_old.yml");
             rename($this->getDataFolder()."config.yml", $this->getDataFolder()."config_old.yml");

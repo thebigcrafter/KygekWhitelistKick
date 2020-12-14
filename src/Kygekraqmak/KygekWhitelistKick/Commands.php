@@ -26,8 +26,10 @@ declare(strict_types=1);
 
 namespace Kygekraqmak\KygekWhitelistKick;
 
+use Kygekraqmak\KygekWhitelistKick\form\Forms;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
+use pocketmine\Player;
 use pocketmine\utils\TextFormat as TF;
 
 class Commands extends PluginCommand {
@@ -41,7 +43,7 @@ class Commands extends PluginCommand {
         $this->main = $main;
         parent::__construct("whitelistkick", $main);
         $this->setAliases(["wlkick"]);
-        $this->setUsage("/wlkick <help|off|on|set>");
+        $this->setUsage("/wlkick [help|off|on|set]");
         $this->setDescription("KygekWhitelistKick commands");
     }
 
@@ -50,6 +52,31 @@ class Commands extends PluginCommand {
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
+        if ($this->main->configExists()) $this->main()->reloadConfig();
+
+        if (strtolower($this->main()->getConfig()->get("mode")) === "form") {
+            if (!$sender instanceof Player) {
+                $sender->sendMessage(WhitelistKick::PREFIX . TF::RED . "Form mode can only be executed in-game!");
+                return true;
+            }
+
+            if (
+                !$sender->hasPermission("kygekwhitelistkick.cmd." . (Forms::isEnabled() ? "off" : "on")) &&
+                !$sender->hasPermission("kygekwhitelistkick.cmd.set")
+            ) {
+                $sender->sendMessage(WhitelistKick::PREFIX . TF::RED . "You do not have permission to open KygekWhitelistKick form!");
+                return true;
+            }
+
+            if (!$this->main->configExists()) {
+                $sender->sendMessage(self::CONFIG_NOT_EXISTS);
+                return true;
+            }
+
+            Forms::mainForm($sender);
+            return true;
+        }
+
         if (count($args) < 1) {
             if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
                 $this->main()->getHelp($sender);
