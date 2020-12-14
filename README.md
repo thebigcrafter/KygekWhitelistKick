@@ -12,6 +12,7 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 - Supports `&` as formatting codes
 - Enable or disable plugin with command
 - Kick reason can be changed using command
+- Command and form mode
 - Automatic plugin update checker on server startup
 - Missing configuration file detection
 
@@ -24,12 +25,14 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 
 # Commands & Permissions
 
+**Note:** KygekWhitelistKick uses commands by default. To switch to form mode, set `mode` in `config.yml` to `form`. After switching, execute `/whitelistkick` to open KygekWhitelistKick form.
+
 | Command | Description | Permission | Default |
 | --- | --- | --- | --- |
-| `/whitelistkick help` | Permission to see KygekWhitelistKick commands | `kygekwhitelistkick.cmd.help` | op |
-| `/whitelistkick off` | Permission to turn off KygekWhitelistKick | `kygekwhitelistkick.cmd.off` | op |
-| `/whitelistkick on` | Permission to turn on KygekWhitelistKick | `kygekwhitelistkick.cmd.on` | op |
-| `/whitelistkick set` | Permission to change kick reason | `kygekwhitelistkick.cmd.set` | op |
+| `/whitelistkick help` | Display KygekWhitelistKick subcommands | `kygekwhitelistkick.cmd.help` | op |
+| `/whitelistkick off` | Disable automatic kick on whitelist enabled | `kygekwhitelistkick.cmd.off` | op |
+| `/whitelistkick on` | Enable automatic kick on whitelist enabled | `kygekwhitelistkick.cmd.on` | op |
+| `/whitelistkick set` | Change whitelist kick reason | `kygekwhitelistkick.cmd.set` | op |
 
 Use `kygekwhitelistkick.cmd` to give players permission to all subcommands. Typing `/whitelistkick` without args or args other than above will show KygekWhitelistKick help (Player needs to have `kygekwhitelistkick.cmd.help` permission).
 
@@ -39,8 +42,7 @@ Use `-` before each permission to blacklist the command(s) permission to groups/
 
 # Upcoming Features
 
-- Form mode
-- And much more
+- Currently none planned. You can contribute or suggest for new features.
 
 # Additional Notes
 
