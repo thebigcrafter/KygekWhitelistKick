@@ -1,5 +1,27 @@
 <?php
 
+/**
+ *     _    __                  _                                     _
+ *    | |  / /                 | |                                   | |
+ *    | | / /                  | |                                   | |
+ *    | |/ / _   _  ____   ____| | ______ ____   _____ ______   ____ | | __
+ *    | |\ \| | | |/ __ \ / __ \ |/ /  __/ __ \ / __  | _  _ \ / __ \| |/ /
+ *    | | \ \ \_| | <__> |  ___/   <| / | <__> | <__| | |\ |\ | <__> |   <
+ * By |_|  \_\__  |\___  |\____|_|\_\_|  \____^_\___  |_||_||_|\____^_\|\_\
+ *              | |    | |                          | |
+ *           ___/ | ___/ |                          | |
+ *          |____/ |____/                           |_|
+ *
+ * Kicks not whitelisted players when server whitelist is enabled
+ * Copyright (C) 2020 Kygekraqmak
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ */
+
 declare(strict_types=1);
 
 namespace Kygekraqmak\KygekWhitelistKick\form;
@@ -38,6 +60,7 @@ class Forms {
         if ($player->hasPermission("kygekwhitelistkick.cmd.set"))
             $form->addButton("Set kick reason");
         $form->addButton("Exit");
+        
         $player->sendForm($form);
     }
 
@@ -56,6 +79,7 @@ class Forms {
         $form->setContent("Are you sure you want to " . (self::isEnabled() ? "disable" : "enable") . " KygekWhitelistKick?");
         $form->addButton("Yes");
         $form->addButton("Back");
+        
         $player->sendForm($form);
     }
 
@@ -75,6 +99,7 @@ class Forms {
 
         $form->setTitle("Set kick reason");
         $form->addInput("Enter the kick reason you want to change:", "Enter here");
+        
         $player->sendForm($form);
     }
 
@@ -86,6 +111,7 @@ class Forms {
         $form->setTitle($title);
         $form->setContent($content);
         $form->addButton($return ? "Back" : "Ok");
+        
         $player->sendForm($form);
     }
 
