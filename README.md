@@ -47,5 +47,5 @@ Use `-` before each permission to blacklist the command(s) permission to groups/
 # Additional Notes
 
 - Join our Discord server <a href="https://discord.gg/CXtqUZv">here</a> for latest updates from KygekTeam.
-- If you found bugs or want to give suggestions, please visit <a href="https://github.com/Kygekraqmak/KygekWhitelistKick/issues">here</a> or join our Discord server.
-- We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/Kygekraqmak/KygekWhitelistKick/pulls">here</a>.
+- If you found bugs or want to give suggestions, please visit <a href="https://github.com/KygekTeam/KygekWhitelistKick/issues">here</a> or join our Discord server.
+- We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/KygekTeam/KygekWhitelistKick/pulls">here</a>.
