@@ -49,3 +49,7 @@ Use `-` before each permission to blacklist the command(s) permission to groups/
 - Join our Discord server <a href="https://discord.gg/CXtqUZv">here</a> for latest updates from KygekTeam.
 - If you found bugs or want to give suggestions, please visit <a href="https://github.com/KygekTeam/KygekWhitelistKick/issues">here</a> or join our Discord server.
 - We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/KygekTeam/KygekWhitelistKick/pulls">here</a>.
+
+# Other Versions
+
+- [Nukkit](https://github.com/KygekTeam/KygekWhitelistKick-Nukkit)
