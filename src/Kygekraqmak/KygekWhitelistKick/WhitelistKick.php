@@ -26,7 +26,7 @@ declare(strict_types=1);
 
 namespace Kygekraqmak\KygekWhitelistKick;
 
-use JackMD\UpdateNotifier\UpdateNotifier;
+use KygekTeam\KtpmplCfs\KtpmplCfs;
 use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
@@ -51,25 +51,16 @@ class WhitelistKick extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveResource("config.yml");
         $this->checkConfig();
-        if ($this->getConfig()->get("check-updates", true)) {
-            UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
-        }
+        KtpmplCfs::checkUpdates($this);
         $this->getServer()->getCommandMap()->register("KygekWhitelistKick", new Commands($this));
     }
 
     public function checkConfig() {
-        if ($this->getConfig()->get("config-version") !== "1.3") {
-            $this->getLogger()->notice("Your configuration file is outdated, updating the config.yml...");
-            $this->getLogger()->notice("The old configuration file can be found at config_old.yml");
-            rename($this->getDataFolder()."config.yml", $this->getDataFolder()."config_old.yml");
-            $this->saveResource("config.yml");
-            return;
-        }
+        KtpmplCfs::checkConfig($this, "1.4");
         if ($this->getConfig()->get("reset") === true) {
             $this->getLogger()->notice("Successfully reset the configuration file");
             unlink($this->getDataFolder()."config.yml");
             $this->saveResource("config.yml");
-            return;
         }
     }
 
