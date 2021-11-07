@@ -13,7 +13,7 @@
  *          |____/ |____/                           |_|
  *
  * Kicks not whitelisted players when server whitelist is enabled
- * Copyright (C) 2020-2021 Kygekraqmak
+ * Copyright (C) 2020-2021 Kygekraqmak, KygekTeam
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
