@@ -37,6 +37,8 @@ use pocketmine\utils\TextFormat as TF;
 
 class WhitelistKick extends PluginBase implements Listener {
 
+    private const IS_DEV = true;
+
     const PREFIX = TF::YELLOW . "[".TF::AQUA . "KygekWhitelistKick" . TF::YELLOW . "] " . TF::RESET;
 
     public static WhitelistKick $instance;
@@ -47,6 +49,10 @@ class WhitelistKick extends PluginBase implements Listener {
 
     protected function onEnable() : void {
         self::$instance = $this;
+        /** @phpstan-ignore-next-line */
+        if (self::IS_DEV) {
+            $this->getLogger()->warning("This plugin is running on a development version. There might be some major bugs. If you found one, please submit an issue in https://github.com/KygekTeam/KygekWhitelistKick/issues.");
+        }
 
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveResource("config.yml");
