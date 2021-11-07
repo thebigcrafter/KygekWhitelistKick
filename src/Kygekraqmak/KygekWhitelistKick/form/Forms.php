@@ -26,10 +26,10 @@ declare(strict_types=1);
 
 namespace Kygekraqmak\KygekWhitelistKick\form;
 
-use jojoe77777\FormAPI\CustomForm;
-use jojoe77777\FormAPI\SimpleForm;
 use Kygekraqmak\KygekWhitelistKick\WhitelistKick;
-use pocketmine\Player;
+use pocketmine\player\Player;
+use Vecnavium\FormsUI\CustomForm;
+use Vecnavium\FormsUI\SimpleForm;
 
 class Forms {
 
@@ -55,9 +55,9 @@ class Forms {
 
         $form->setTitle("KygekWhitelistKick");
         $form->setContent("Select options:");
-        if ($player->hasPermission("kygekwhitelistkick.cmd." . (self::isEnabled() ? "off" : "on")))
+        if ($player->hasPermission("kygekwhitelistkick.cmd." . (self::isEnabled() ? "off" : "on")) || $player->hasPermission("kygekwhitelistkick.cmd"))
             $form->addButton((self::isEnabled() ? "Disable" : "Enable") . " KygekWhitelistKick");
-        if ($player->hasPermission("kygekwhitelistkick.cmd.set"))
+        if ($player->hasPermission("kygekwhitelistkick.cmd.set") || $player->hasPermission("kygekwhitelistkick.cmd"))
             $form->addButton("Set kick reason");
         $form->addButton("Exit");
         

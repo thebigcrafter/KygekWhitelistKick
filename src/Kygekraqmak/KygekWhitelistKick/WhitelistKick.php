@@ -27,7 +27,8 @@ declare(strict_types=1);
 namespace Kygekraqmak\KygekWhitelistKick;
 
 use KygekTeam\KtpmplCfs\KtpmplCfs;
-use pocketmine\Player;
+use pocketmine\permission\DefaultPermissions;
+use pocketmine\player\Player;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\server\CommandEvent;
@@ -38,14 +39,13 @@ class WhitelistKick extends PluginBase implements Listener {
 
     const PREFIX = TF::YELLOW . "[".TF::AQUA . "KygekWhitelistKick" . TF::YELLOW . "] " . TF::RESET;
 
-    /** @var WhitelistKick */
-    public static $instance;
+    public static WhitelistKick $instance;
 
     public static function getInstance() : self {
         return self::$instance;
     }
 
-    public function onEnable() {
+    protected function onEnable() : void {
         self::$instance = $this;
 
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -56,7 +56,7 @@ class WhitelistKick extends PluginBase implements Listener {
     }
 
     public function checkConfig() {
-        KtpmplCfs::checkConfig($this, "1.4");
+        KtpmplCfs::checkConfig($this, "2.0");
         if ($this->getConfig()->get("reset") === true) {
             $this->getLogger()->notice("Successfully reset the configuration file");
             unlink($this->getDataFolder()."config.yml");
@@ -125,7 +125,7 @@ class WhitelistKick extends PluginBase implements Listener {
     }
 
     public function isWhitelisted(Player $player) : bool {
-        if ($player->isOp()) return true;
+        if ($player->hasPermission(DefaultPermissions::ROOT_OPERATOR)) return true;
         $this->getServer()->getWhitelisted()->reload();
         return in_array(strtolower($player->getName()), array_keys($this->getServer()->getWhitelisted()->getAll()));
     }

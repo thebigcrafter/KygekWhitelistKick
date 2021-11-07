@@ -28,23 +28,20 @@ namespace Kygekraqmak\KygekWhitelistKick;
 
 use Kygekraqmak\KygekWhitelistKick\form\Forms;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginCommand;
-use pocketmine\Player;
+use pocketmine\command\Command;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat as TF;
 
-class Commands extends PluginCommand {
+class Commands extends Command {
 
     private const NO_PERM = TF::RED . "You do not have permission to use this command";
     private const CONFIG_NOT_EXISTS = WhitelistKick::PREFIX . TF::RED . "Configuration file is missing, please restart the server!";
 
-    private $main;
+    private WhitelistKick $main;
 
     public function __construct(WhitelistKick $main) {
         $this->main = $main;
-        parent::__construct("whitelistkick", $main);
-        $this->setAliases(["wlkick"]);
-        $this->setUsage("/wlkick [help|off|on|set]");
-        $this->setDescription("KygekWhitelistKick commands");
+        parent::__construct("whitelistkick", "KygekWhitelistKick commands", "/wlkick [help|off|on|set]", ["wlkick"]);
     }
 
     public function main() : WhitelistKick {
@@ -62,7 +59,7 @@ class Commands extends PluginCommand {
 
             if (
                 !$sender->hasPermission("kygekwhitelistkick.cmd." . (Forms::isEnabled() ? "off" : "on")) &&
-                !$sender->hasPermission("kygekwhitelistkick.cmd.set")
+                !$sender->hasPermission("kygekwhitelistkick.cmd.set") && !$sender->hasPermission("kygekwhitelistkick.cmd")
             ) {
                 $sender->sendMessage(WhitelistKick::PREFIX . TF::RED . "You do not have permission to open KygekWhitelistKick form!");
                 return true;
@@ -78,19 +75,19 @@ class Commands extends PluginCommand {
         }
 
         if (count($args) < 1) {
-            if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
+            if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd"))
                 $this->main()->getHelp($sender);
             else $sender->sendMessage(self::NO_PERM);
         } elseif (isset($args[0])) {
             switch ($args[0]) {
                 case "help":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help")) {
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
                         $this->main()->getHelp($sender);
                     }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "off":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.off")) {
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.off") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
                         if (!$this->main->configExists()) {
                             $sender->sendMessage(self::CONFIG_NOT_EXISTS);
                             return true;
@@ -100,7 +97,7 @@ class Commands extends PluginCommand {
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "on":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.on")) {
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.on") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
                         if (!$this->main->configExists()) {
                             $sender->sendMessage(self::CONFIG_NOT_EXISTS);
                             return true;
@@ -110,7 +107,7 @@ class Commands extends PluginCommand {
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "set":
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.set")) {
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.set") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
                         if (empty($args[1])) $this->main()->getSubcommandUsage($sender);
                         else {
                             if (!$this->main->configExists()) {
@@ -123,7 +120,7 @@ class Commands extends PluginCommand {
                     } else $sender->sendMessage(self::NO_PERM);
                     break;
                 default:
-                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
+                    if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd"))
                         $this->main()->getHelp($sender);
                     else $sender->sendMessage(self::NO_PERM);
             }
