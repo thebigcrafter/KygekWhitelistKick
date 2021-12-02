@@ -20,12 +20,12 @@
 #
 
 name: KygekWhitelistKick
-version: 2.0.0-BETA
+version: 2.0.0
 main: Kygekraqmak\KygekWhitelistKick\WhitelistKick
 api: 4.0.0
-extensions:
-  Core: ">=8.0"
 authors: [Kygekraqmak, KygekTeam]
+description: Kicks not whitelisted players when server whitelist is enabled
+website: https://github.com/KygekTeam/KygekWhitelistKick
 
 permissions:
   kygekwhitelistkick.cmd:

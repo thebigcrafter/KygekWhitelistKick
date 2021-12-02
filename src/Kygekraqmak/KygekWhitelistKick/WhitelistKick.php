@@ -37,7 +37,7 @@ use pocketmine\utils\TextFormat as TF;
 
 class WhitelistKick extends PluginBase implements Listener {
 
-    private const IS_DEV = true;
+    private const IS_DEV = false;
 
     const PREFIX = TF::YELLOW . "[".TF::AQUA . "KygekWhitelistKick" . TF::YELLOW . "] " . TF::RESET;
 
