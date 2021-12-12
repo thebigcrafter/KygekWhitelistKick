@@ -30,9 +30,10 @@ use Kygekraqmak\KygekWhitelistKick\form\Forms;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
 use pocketmine\player\Player;
+use pocketmine\plugin\PluginOwned;
 use pocketmine\utils\TextFormat as TF;
 
-class Commands extends Command {
+class Commands extends Command implements PluginOwned {
 
     private const NO_PERM = TF::RED . "You do not have permission to use this command";
     private const CONFIG_NOT_EXISTS = WhitelistKick::PREFIX . TF::RED . "Configuration file is missing, please restart the server!";
@@ -44,14 +45,10 @@ class Commands extends Command {
         parent::__construct("whitelistkick", "KygekWhitelistKick commands", "/wlkick [help|off|on|set]", ["wlkick"]);
     }
 
-    public function main() : WhitelistKick {
-        return $this->main;
-    }
-
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
-        if ($this->main->configExists()) $this->main()->reloadConfig();
+        if ($this->getOwningPlugin()->configExists()) $this->getOwningPlugin()->reloadConfig();
 
-        if (strtolower($this->main()->getConfig()->get("mode")) === "form") {
+        if (strtolower($this->getOwningPlugin()->getConfig()->get("mode")) === "form") {
             if (!$sender instanceof Player) {
                 $sender->sendMessage(WhitelistKick::PREFIX . TF::RED . "Form mode can only be executed in-game!");
                 return true;
@@ -65,7 +62,7 @@ class Commands extends Command {
                 return true;
             }
 
-            if (!$this->main->configExists()) {
+            if (!$this->getOwningPlugin()->configExists()) {
                 $sender->sendMessage(self::CONFIG_NOT_EXISTS);
                 return true;
             }
@@ -76,56 +73,60 @@ class Commands extends Command {
 
         if (count($args) < 1) {
             if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd"))
-                $this->main()->getHelp($sender);
+                $this->getOwningPlugin()->getHelp($sender);
             else $sender->sendMessage(self::NO_PERM);
         } elseif (isset($args[0])) {
             switch ($args[0]) {
                 case "help":
                     if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
-                        $this->main()->getHelp($sender);
+                        $this->getOwningPlugin()->getHelp($sender);
                     }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "off":
                     if ($sender->hasPermission("kygekwhitelistkick.cmd.off") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
-                        if (!$this->main->configExists()) {
+                        if (!$this->getOwningPlugin()->configExists()) {
                             $sender->sendMessage(self::CONFIG_NOT_EXISTS);
                             return true;
                         }
-                        $this->main()->disableWhitelistKick($sender);
+                        $this->getOwningPlugin()->disableWhitelistKick($sender);
                     }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "on":
                     if ($sender->hasPermission("kygekwhitelistkick.cmd.on") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
-                        if (!$this->main->configExists()) {
+                        if (!$this->getOwningPlugin()->configExists()) {
                             $sender->sendMessage(self::CONFIG_NOT_EXISTS);
                             return true;
                         }
-                        $this->main()->enableWhitelistKick($sender);
+                        $this->getOwningPlugin()->enableWhitelistKick($sender);
                     }
                     else $sender->sendMessage(self::NO_PERM);
                     break;
                 case "set":
                     if ($sender->hasPermission("kygekwhitelistkick.cmd.set") || $sender->hasPermission("kygekwhitelistkick.cmd")) {
-                        if (empty($args[1])) $this->main()->getSubcommandUsage($sender);
+                        if (empty($args[1])) $this->getOwningPlugin()->getSubcommandUsage($sender);
                         else {
-                            if (!$this->main->configExists()) {
+                            if (!$this->getOwningPlugin()->configExists()) {
                                 $sender->sendMessage(self::CONFIG_NOT_EXISTS);
                                 return true;
                             }
                             unset($args[0]);
-                            $this->main()->setKickReason(implode(" ", $args), $sender);
+                            $this->getOwningPlugin()->setKickReason(implode(" ", $args), $sender);
                         }
                     } else $sender->sendMessage(self::NO_PERM);
                     break;
                 default:
                     if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd"))
-                        $this->main()->getHelp($sender);
+                        $this->getOwningPlugin()->getHelp($sender);
                     else $sender->sendMessage(self::NO_PERM);
             }
         }
         return true;
+    }
+
+    public function getOwningPlugin() : WhitelistKick {
+        return $this->main;
     }
 
 }
