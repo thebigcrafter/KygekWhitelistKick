@@ -48,7 +48,7 @@ class Commands extends Command implements PluginOwned {
     public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
         if ($this->getOwningPlugin()->configExists()) $this->getOwningPlugin()->reloadConfig();
 
-        if (strtolower($this->getOwningPlugin()->getConfig()->get("mode")) === "form") {
+        if (mb_strtolower($this->getOwningPlugin()->getConfig()->get("mode")) === "form") {
             if (!$sender instanceof Player) {
                 $sender->sendMessage(WhitelistKick::PREFIX . TF::RED . "Form mode can only be executed in-game!");
                 return true;

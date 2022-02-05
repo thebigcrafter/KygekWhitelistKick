@@ -49,20 +49,23 @@ class WhitelistKick extends PluginBase implements Listener {
 
     protected function onEnable() : void {
         self::$instance = $this;
+        $this->saveDefaultConfig();
+        $ktpmplCfs = new KtpmplCfs($this);
+
         /** @phpstan-ignore-next-line */
         if (self::IS_DEV) {
-            $this->getLogger()->warning("This plugin is running on a development version. There might be some major bugs. If you found one, please submit an issue in https://github.com/KygekTeam/KygekWhitelistKick/issues.");
+            $ktpmplCfs->warnDevelopmentVersion();
         }
 
+        $this->checkConfig($ktpmplCfs);
+        $ktpmplCfs->checkUpdates();
+
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->saveResource("config.yml");
-        $this->checkConfig();
-        KtpmplCfs::checkUpdates($this);
         $this->getServer()->getCommandMap()->register("KygekWhitelistKick", new Commands($this));
     }
 
-    public function checkConfig() {
-        KtpmplCfs::checkConfig($this, "2.1");
+    public function checkConfig(KtpmplCfs $ktpmplCfs) {
+        $ktpmplCfs->checkConfig("2.1");
         if ($this->getConfig()->get("reset") === true) {
             $this->getLogger()->notice("Successfully reset the configuration file");
             unlink($this->getDataFolder()."config.yml");
@@ -77,7 +80,7 @@ class WhitelistKick extends PluginBase implements Listener {
                 $this->getConfig()->reload();
                 foreach ($this->getServer()->getOnlinePlayers() as $player) {
                     if ($this->isWhitelisted($player)) continue;
-                    $reason = str_replace("&", "§", $this->getConfig()->get("reason"));
+                    $reason = TF::colorize($this->getConfig()->get("reason"));
                     $reason = ($reason != null) ? $reason : self::PREFIX . TF::RED . "Whitelist have been enabled and you are not whitelisted!";
                     $player->kick($reason);
                 }
@@ -133,7 +136,7 @@ class WhitelistKick extends PluginBase implements Listener {
     public function isWhitelisted(Player $player) : bool {
         if ($player->hasPermission(DefaultPermissions::ROOT_OPERATOR)) return true;
         $this->getServer()->getWhitelisted()->reload();
-        return in_array(strtolower($player->getName()), array_keys($this->getServer()->getWhitelisted()->getAll()));
+        return in_array(mb_strtolower($player->getName()), array_keys($this->getServer()->getWhitelisted()->getAll()));
     }
 
     public function configExists() : bool {
