@@ -13,7 +13,7 @@
  *          |____/ |____/                           |_|
  *
  * Kicks not whitelisted players when server whitelist is enabled
- * Copyright (C) 2020-2021 Kygekraqmak, KygekTeam
+ * Copyright (C) 2020-2022 Kygekraqmak, KygekTeam
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ class WhitelistKick extends PluginBase implements Listener {
     }
 
     public function checkConfig() {
-        KtpmplCfs::checkConfig($this, "2.0");
+        KtpmplCfs::checkConfig($this, "2.1");
         if ($this->getConfig()->get("reset") === true) {
             $this->getLogger()->notice("Successfully reset the configuration file");
             unlink($this->getDataFolder()."config.yml");

@@ -11,7 +11,7 @@
 #          |____/ |____/                           |_|
 #
 # Kicks not whitelisted players when server whitelist is enabled
-# Copyright (C) 2020-2021 Kygekraqmak, KygekTeam
+# Copyright (C) 2020-2022 Kygekraqmak, KygekTeam
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 #
 
 name: KygekWhitelistKick
-version: 2.0.0
+version: 2.1.0
 main: Kygekraqmak\KygekWhitelistKick\WhitelistKick
 api: 4.0.0
 authors: [Kygekraqmak, KygekTeam]
