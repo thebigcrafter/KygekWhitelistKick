@@ -1,13 +1,16 @@
-# KygekWhitelistKick
+<h1 align="center">KygekWhitelistKick</h1>
 
-<a href="https://poggit.pmmp.io/p/KygekWhitelistKick"><img src="https://poggit.pmmp.io/shield.dl.total/KygekWhitelistKick"></a>
-[![Discord](https://img.shields.io/discord/735439472992321587.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/CXtqUZv)
+<p align="center">
+<a href="https://poggit.pmmp.io/p/KygekWhitelistKick"><img src="https://poggit.pmmp.io/shield.dl.total/KygekWhitelistKick?style=for-the-badge" alt="poggit" /></a>
+<a href="https://github.com/thebigcrafter/KygekWhitelistKick/blob/main/LICENSE"><img src="https://img.shields.io/github/license/thebigcrafter/KygekWhitelistKick?style=for-the-badge" alt="license" /></a>
+<a href="https://discord.gg/cEXW8uK6QA"><img src="https://img.shields.io/discord/970294579372912700?color=7289DA&label=discord&logo=discord&style=for-the-badge" alt="discord" /></a>
+</p>
 
-**NOTICE:** This plugin branch is for PocketMine-MP 4. If you are looking for the PocketMine-MP 3 version of this plugin, please visit the [master](https://github.com/KygekTeam/KygekWhitelistKick/tree/master) branch.
+# 📖 About
 
 This plugin will kick players that are not OP or whitelisted in white-list.txt when server whitelist turned on (/whitelist on). This plugin will be useful if you often need to whitelist your server and you want all not whitelisted players to be kicked automatically. You can change the kick reason and to enable/disable kick via command or config.
 
-# Features
+# 🧩 Features
 
 - Kicks not whitelisted players automatically
 - Config file can be reset
@@ -18,14 +21,14 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 - Automatic plugin update checker on server startup
 - Missing configuration file detection
 
-# How to Install
+# ⬇️ Installation
 
 1. Download the latest version (It is recommended to always download the latest version for the best experience, except you're having compatibility issues).
 2. Place the `KygekWhitelistKick.phar` file into the `plugins` folder.
 3. Restart the server.
 4. Done!
 
-# Commands & Permissions
+# 📜 Commands & Permissions
 
 **Note:** KygekWhitelistKick uses commands by default. To switch to form mode, set `mode` in `config.yml` to `form`. After switching, execute `/whitelistkick` to open KygekWhitelistKick form.
 
@@ -36,22 +39,15 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 | `/whitelistkick on` | Enable automatic kick on whitelist enabled | `kygekwhitelistkick.cmd.on` | op |
 | `/whitelistkick set` | Change whitelist kick reason | `kygekwhitelistkick.cmd.set` | op |
 
-Use `kygekwhitelistkick.cmd` to give players permission to all subcommands. Typing `/whitelistkick` without args or args other than above will show KygekWhitelistKick help (Player needs to have `kygekwhitelistkick.cmd.help` permission).
+💡 Tips:
+- Use `kygekwhitelistkick.cmd` to give players permission to all subcommands. Typing `/whitelistkick` without args or args other than above will show KygekWhitelistKick help (Player needs to have `kygekwhitelistkick.cmd.help` permission).
+- Command alias: `/wlkick`
+- Use `-` before each permission to blacklist the command(s) permission to groups/users in PurePerms (e.g. adding `-kygekwhitelistkick.cmd.set` will blacklist the `/whitelistkick set` command to groups/users).
 
-Command alias: `/wlkick`
-
-Use `-` before each permission to blacklist the command(s) permission to groups/users in PurePerms (e.g. adding `-kygekwhitelistkick.cmd.set` will blacklist the `/whitelistkick set` command to groups/users).
-
-# Upcoming Features
-
-- Currently none planned. You can contribute or suggest for new features.
-
-# Additional Notes
-
-- Join our Discord server <a href="https://discord.gg/CXtqUZv">here</a> for latest updates from KygekTeam.
-- If you found bugs or want to give suggestions, please visit <a href="https://github.com/KygekTeam/KygekWhitelistKick/issues">here</a> or join our Discord server.
-- We accept all contributions! If you want to contribute, please make a pull request in <a href="https://github.com/KygekTeam/KygekWhitelistKick/pulls">here</a>.
-
-# Other Versions
+# 🚢 Other Versions
 
 - [Nukkit](https://github.com/KygekTeam/KygekWhitelistKick-Nukkit)
+
+# ⚖️ License
+
+Licensed under the [GNU General Public License v3.0](https://github.com/thebigcrafter/KygekWhitelistKick/blob/main/LICENSE) license.
