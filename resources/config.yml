@@ -4,9 +4,7 @@
 
 ##### DANGER ZONE #####
 # Do not change this (Only for internal use)!
-config-version: "2.1"
-# If you encounter bugs set this to true to reset the config!
-reset: false
+config-version: "2.2"
 #######################
 
 # Set the configuration mode
@@ -21,10 +19,4 @@ enabled: true
 # Use "&" as formatting codes.
 # Leave it empty if you want to use the default reason
 reason: ""
-
-# Whether to check for plugin updates (Recommended)
-check-updates: true
-
-# Whether to warn if plugin is running on a development version (Recommended)
-warn-development: true
 ...
