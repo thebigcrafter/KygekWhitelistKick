@@ -50,7 +50,8 @@ class Commands extends Command implements PluginOwned {
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
 		if ($this->getOwningPlugin()->configExists()) $this->getOwningPlugin()->reloadConfig();
 
-		if (mb_strtolower($this->getOwningPlugin()->getConfig()->get("mode")) === "form") {
+		$mode = $this->getOwningPlugin()->getConfig()->get("mode");
+		if (is_string($mode) && mb_strtolower($mode) === "form") {
 			if (!$sender instanceof Player) {
 				$sender->sendMessage(WhitelistKick::PREFIX . TF::RED . "Form mode can only be executed in-game!");
 				return true;
@@ -77,7 +78,7 @@ class Commands extends Command implements PluginOwned {
 			if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd"))
 				$this->getOwningPlugin()->getHelp($sender);
 			else $sender->sendMessage(self::NO_PERM);
-		} elseif (isset($args[0])) {
+		} else {
 			switch ($args[0]) {
 				case "help":
 					if ($sender->hasPermission("kygekwhitelistkick.cmd.help") || $sender->hasPermission("kygekwhitelistkick.cmd")) {

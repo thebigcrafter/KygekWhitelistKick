@@ -29,8 +29,6 @@ use Kygekraqmak\KygekWhitelistKick\WhitelistKick;
 use pocketmine\player\Player;
 use Vecnavium\FormsUI\CustomForm;
 use Vecnavium\FormsUI\SimpleForm;
-use function call_user_func;
-
 class Forms {
 
 	/*
@@ -40,7 +38,7 @@ class Forms {
 		return (bool) WhitelistKick::getInstance()->getConfig()->get("enabled");
 	}
 
-	public static function mainForm(Player $player) {
+	public static function mainForm(Player $player) : void {
 		$form = new SimpleForm(function (Player $player, $data = null) {
 			if ($data === null) return;
 			switch ($data) {
@@ -64,7 +62,7 @@ class Forms {
 		$player->sendForm($form);
 	}
 
-	private static function enableDisableForm(Player $player) {
+	private static function enableDisableForm(Player $player) : void {
 		$form = new SimpleForm(function (Player $player, ?int $data = null) {
 			if ($data === 0) {
 				WhitelistKick::getInstance()->setConfig("enabled", !self::isEnabled());
@@ -83,17 +81,17 @@ class Forms {
 		$player->sendForm($form);
 	}
 
-	private static function setReasonForm(Player $player) {
+	private static function setReasonForm(Player $player) : void {
 		$form = new CustomForm(function (Player $player, ?array $data = null) {
 			if ($data === null) {
 				self::mainForm($player);
 				return;
 			}
-			if (empty($data[0])) {
-				self::resultForm($player, "Error", "Please enter kick reason", true, "setReasonForm");
+			if (!isset($data[0]) || !is_string($data[0]) || trim($data[0]) === "") {
+				self::resultForm($player, "Error", "Please enter kick reason", true);
 				return;
 			}
-			WhitelistKick::getInstance()->setConfig("reason", (string) $data[0]);
+			WhitelistKick::getInstance()->setConfig("reason", $data[0]);
 			self::resultForm($player, "Success", "Successfully changed kick reason");
 		});
 
@@ -103,9 +101,9 @@ class Forms {
 		$player->sendForm($form);
 	}
 
-	private static function resultForm(Player $player, string $title, string $content, bool $return = false, ?string $returnedMtd = null) {
-		$form = new SimpleForm(function (Player $player, ?int $data = null) use ($return, $returnedMtd) {
-			if ($return) call_user_func("self::$returnedMtd", $player);
+	private static function resultForm(Player $player, string $title, string $content, bool $return = false) : void {
+		$form = new SimpleForm(function (Player $player, ?int $data = null) use ($return) {
+			if ($return) self::setReasonForm($player);
 		});
 
 		$form->setTitle($title);

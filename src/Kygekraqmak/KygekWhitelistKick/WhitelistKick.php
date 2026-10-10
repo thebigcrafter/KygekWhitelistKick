@@ -60,14 +60,15 @@ class WhitelistKick extends PluginBase implements Listener {
 		$this->getServer()->getCommandMap()->register("KygekWhitelistKick", new Commands($this));
 	}
 
-	public function onWhitelistEnabled(CommandEvent $event) {
+	public function onWhitelistEnabled(CommandEvent $event) : void {
 		$command = $event->getCommand();
 		if ($command == "whitelist on") {
 			if ($this->getConfig()->get("enabled") === true) {
 				$this->getConfig()->reload();
 				foreach ($this->getServer()->getOnlinePlayers() as $player) {
 					if ($this->isWhitelisted($player)) continue;
-					$reason = TF::colorize($this->getConfig()->get("reason"));
+					$configReason = $this->getConfig()->get("reason");
+					$reason = is_string($configReason) ? TF::colorize($configReason) : null;
 					$reason = ($reason != null) ? $reason : self::PREFIX . TF::RED . "Whitelist have been enabled and you are not whitelisted!";
 					$player->kick($reason);
 				}
@@ -75,7 +76,7 @@ class WhitelistKick extends PluginBase implements Listener {
 		}
 	}
 
-	public function enableWhitelistKick(CommandSender $sender) {
+	public function enableWhitelistKick(CommandSender $sender) : void {
 		if ($this->getConfig()->get("enabled") === true) {
 			$sender->sendMessage(self::PREFIX . TF::RED . "KygekWhitelistKick have been enabled");
 		} else {
@@ -84,7 +85,7 @@ class WhitelistKick extends PluginBase implements Listener {
 		}
 	}
 
-	public function disableWhitelistKick(CommandSender $sender) {
+	public function disableWhitelistKick(CommandSender $sender) : void {
 		if ($this->getConfig()->get("enabled") === false) {
 			$sender->sendMessage(self::PREFIX . TF::RED . "KygekWhitelistKick have been disabled");
 		} else {
@@ -93,12 +94,12 @@ class WhitelistKick extends PluginBase implements Listener {
 		}
 	}
 
-	public function setKickReason($reason, CommandSender $sender) {
+	public function setKickReason(string $reason, CommandSender $sender) : void {
 		$this->setConfig("reason", $reason);
 		$sender->sendMessage(self::PREFIX . TF::GREEN . "Successfully changed kick reason");
 	}
 
-	public function getHelp(CommandSender $sender) {
+	public function getHelp(CommandSender $sender) : void {
 		$sender->sendMessage(TF::YELLOW . "===== " . TF::GREEN . "KygekWhitelistKick Commands" . TF::YELLOW . " =====");
 		if ($sender->hasPermission("kygekwhitelistkick.cmd.help"))
 			$sender->sendMessage(TF::AQUA . "> help: " . TF::GRAY . "/wlkick help");
@@ -110,11 +111,11 @@ class WhitelistKick extends PluginBase implements Listener {
 			$sender->sendMessage(TF::AQUA . "> set: " . TF::GRAY . "/wlkick set <reason>");
 	}
 
-	public function getSubcommandUsage(CommandSender $sender) {
+	public function getSubcommandUsage(CommandSender $sender) : void {
 		$sender->sendMessage(self::PREFIX . TF::GRAY . "Usage: /wlkick set <reason>");
 	}
 
-	public function setConfig($key, $value) {
+	public function setConfig(string $key, bool|string $value) : void {
 		$this->getConfig()->set($key, $value);
 		$this->getConfig()->save();
 		$this->getConfig()->reload();
