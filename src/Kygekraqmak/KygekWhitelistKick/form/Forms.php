@@ -29,6 +29,8 @@ use Kygekraqmak\KygekWhitelistKick\WhitelistKick;
 use pocketmine\player\Player;
 use Vecnavium\FormsUI\CustomForm;
 use Vecnavium\FormsUI\SimpleForm;
+use function is_string;
+use function trim;
 class Forms {
 
 	/*

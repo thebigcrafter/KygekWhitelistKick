@@ -37,6 +37,7 @@ use thebigcrafter\Hydrogen\Hydrogen;
 use function array_keys;
 use function file_exists;
 use function in_array;
+use function is_string;
 use function mb_strtolower;
 
 class WhitelistKick extends PluginBase implements Listener {

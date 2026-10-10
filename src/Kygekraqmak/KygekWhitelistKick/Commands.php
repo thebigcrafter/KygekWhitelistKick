@@ -33,6 +33,7 @@ use pocketmine\plugin\PluginOwned;
 use pocketmine\utils\TextFormat as TF;
 use function count;
 use function implode;
+use function is_string;
 use function mb_strtolower;
 
 class Commands extends Command implements PluginOwned {
