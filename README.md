@@ -28,6 +28,14 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 3. Restart the server.
 4. Done!
 
+# 🛠️ Development
+
+Install the locked Composer dependencies and use DevTools to package and validate the plugin PHAR. The packaging metadata resolves the pinned FormsUI and Hydrogen virions without copying a builder release version into user-facing documentation.
+
+```sh
+composer install
+```
+
 # 📜 Commands & Permissions
 
 **Note:** KygekWhitelistKick uses commands by default. To switch to form mode, set `mode` in `config.yml` to `form`. After switching, execute `/whitelistkick` to open KygekWhitelistKick form.
