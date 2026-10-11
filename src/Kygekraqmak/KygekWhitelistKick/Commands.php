@@ -46,6 +46,7 @@ class Commands extends Command implements PluginOwned {
 	public function __construct(WhitelistKick $main) {
 		$this->main = $main;
 		parent::__construct("whitelistkick", "KygekWhitelistKick commands", "/wlkick [help|off|on|set]", ["wlkick"]);
+		$this->setPermission("kygekwhitelistkick.cmd");
 	}
 
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : bool {
