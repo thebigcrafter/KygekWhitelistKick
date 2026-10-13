@@ -1,7 +1,7 @@
 <h1 align="center">KygekWhitelistKick</h1>
 
 <p align="center">
-<a href="https://poggit.pmmp.io/p/KygekWhitelistKick"><img src="https://poggit.pmmp.io/shield.dl.total/KygekWhitelistKick?style=for-the-badge" alt="poggit" /></a>
+<a href="https://github.com/thebigcrafter/KygekWhitelistKick/releases"><img src="https://img.shields.io/github/downloads/thebigcrafter/KygekWhitelistKick/total?style=for-the-badge" alt="GitHub downloads" /></a>
 <a href="https://github.com/thebigcrafter/KygekWhitelistKick#GPL-3.0-1"><img src="https://img.shields.io/github/license/thebigcrafter/KygekWhitelistKick?style=for-the-badge" alt="license" /></a>
 <a href="https://discord.gg/PykBfE2TZ9"><img src="https://img.shields.io/discord/1087729577004122112?color=7289DA&label=discord&logo=discord&style=for-the-badge" alt="discord" /></a>
 </p>
@@ -23,9 +23,9 @@ This plugin will kick players that are not OP or whitelisted in white-list.txt w
 
 # ⬇️ Installation
 
-1. Download the latest version (It is recommended to always download the latest version for the best experience, except you're having compatibility issues).
+1. Download the latest version from [GitHub Releases](https://github.com/thebigcrafter/KygekWhitelistKick/releases). It is recommended to use the latest version unless you are investigating a compatibility issue.
 2. Place the `KygekWhitelistKick.phar` file into the `plugins` folder.
-3. Restart the server.
+3. Restart Axolotl-PM.
 4. Done!
 
 # 🛠️ Development
